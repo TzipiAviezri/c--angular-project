@@ -1,0 +1,10 @@
+    <form (ngSubmit)="login()">
+        <input type="text"  placeholder="name" name="name" [(ngModel)]="customerService.currentUser.name" required 
+        pattern="[0-9]*" minlength="9" maxlength="9" #name = 'ngModel'>
+        <br>
+        <input type="password" placeholder="password" name="password" [(ngModel)]="customerService.currentUser.password" required 
+         #password = 'ngModel'>
+        <br>
+        <input type="submit">
+    </form>
+    

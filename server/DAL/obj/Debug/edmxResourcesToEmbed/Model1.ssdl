@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="finalAngularDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameCategory" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="cusId" />
+    </Key>
+    <Property Name="cusId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cusName" Type="varchar" MaxLength="20" />
+    <Property Name="cusCard" Type="varchar" MaxLength="50" />
+    <Property Name="pin" Type="smallint" />
+  </EntityType>
+  <EntityType Name="details">
+    <Key>
+      <PropertyRef Name="detailsId" />
+    </Key>
+    <Property Name="detailsId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shopingId" Type="smallint" />
+    <Property Name="productId" Type="smallint" />
+    <Property Name="amount" Type="smallint" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productName" Type="varchar" MaxLength="20" />
+    <Property Name="idCategory" Type="smallint" />
+    <Property Name="price" Type="smallint" />
+    <Property Name="img" Type="varchar" MaxLength="30" />
+    <Property Name="color" Type="varchar" MaxLength="30" />
+    <Property Name="amount" Type="smallint" />
+  </EntityType>
+  <EntityType Name="shoping">
+    <Key>
+      <PropertyRef Name="shopingId" />
+    </Key>
+    <Property Name="shopingId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerId" Type="smallint" />
+    <Property Name="shopingDate" Type="date" />
+    <Property Name="shopingSum" Type="smallint" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__details__product__2F10007B">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="details" Type="Self.details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="details">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__details__shoping__2E1BDC42">
+    <End Role="shoping" Type="Self.shoping" Multiplicity="0..1" />
+    <End Role="details" Type="Self.details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shoping">
+        <PropertyRef Name="shopingId" />
+      </Principal>
+      <Dependent Role="details">
+        <PropertyRef Name="shopingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__shoping__custome__2A4B4B5E">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="shoping" Type="Self.shoping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="cusId" />
+      </Principal>
+      <Dependent Role="shoping">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_category">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="idCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="finalAngularDbModelStoreContainer">
+    <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="details" EntityType="Self.details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shoping" EntityType="Self.shoping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__details__product__2F10007B" Association="Self.FK__details__product__2F10007B">
+      <End Role="products" EntitySet="products" />
+      <End Role="details" EntitySet="details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__details__shoping__2E1BDC42" Association="Self.FK__details__shoping__2E1BDC42">
+      <End Role="shoping" EntitySet="shoping" />
+      <End Role="details" EntitySet="details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__shoping__custome__2A4B4B5E" Association="Self.FK__shoping__custome__2A4B4B5E">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="shoping" EntitySet="shoping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_category" Association="Self.FK_products_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

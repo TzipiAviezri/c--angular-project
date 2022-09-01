@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="finalAngularDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameCategory" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="cusId" />
+          </Key>
+          <Property Name="cusId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cusName" Type="varchar" MaxLength="20" />
+          <Property Name="cusCard" Type="varchar" MaxLength="50" />
+          <Property Name="pin" Type="smallint" />
+        </EntityType>
+        <EntityType Name="details">
+          <Key>
+            <PropertyRef Name="detailsId" />
+          </Key>
+          <Property Name="detailsId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shopingId" Type="smallint" />
+          <Property Name="productId" Type="smallint" />
+          <Property Name="amount" Type="smallint" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="varchar" MaxLength="20" />
+          <Property Name="idCategory" Type="smallint" />
+          <Property Name="price" Type="smallint" />
+          <Property Name="img" Type="varchar" MaxLength="30" />
+          <Property Name="color" Type="varchar" MaxLength="30" />
+          <Property Name="amount" Type="smallint" />
+        </EntityType>
+        <EntityType Name="shoping">
+          <Key>
+            <PropertyRef Name="shopingId" />
+          </Key>
+          <Property Name="shopingId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerId" Type="smallint" />
+          <Property Name="shopingDate" Type="date" />
+          <Property Name="shopingSum" Type="smallint" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__details__product__2F10007B">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__details__shoping__2E1BDC42">
+          <End Role="shoping" Type="Self.shoping" Multiplicity="0..1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shoping">
+              <PropertyRef Name="shopingId" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="shopingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shoping__custome__2A4B4B5E">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="shoping" Type="Self.shoping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="cusId" />
+            </Principal>
+            <Dependent Role="shoping">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="finalAngularDbModelStoreContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="details" EntityType="Self.details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shoping" EntityType="Self.shoping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__details__product__2F10007B" Association="Self.FK__details__product__2F10007B">
+            <End Role="products" EntitySet="products" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__details__shoping__2E1BDC42" Association="Self.FK__details__shoping__2E1BDC42">
+            <End Role="shoping" EntitySet="shoping" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shoping__custome__2A4B4B5E" Association="Self.FK__shoping__custome__2A4B4B5E">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="shoping" EntitySet="shoping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_category" Association="Self.FK_products_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="finalAngularDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameCategory" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="finalAngularDbModel.FK_products_category" FromRole="category" ToRole="products" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="cusId" />
+          </Key>
+          <Property Name="cusId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cusCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pin" Type="Int16" />
+          <NavigationProperty Name="shoping" Relationship="Self.FK__shoping__custome__2A4B4B5E" FromRole="customer" ToRole="shoping" />
+        </EntityType>
+        <EntityType Name="details">
+          <Key>
+            <PropertyRef Name="detailsId" />
+          </Key>
+          <Property Name="detailsId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shopingId" Type="Int16" />
+          <Property Name="productId" Type="Int16" />
+          <Property Name="amount" Type="Int16" />
+          <NavigationProperty Name="products" Relationship="Self.FK__details__product__2F10007B" FromRole="details" ToRole="products" />
+          <NavigationProperty Name="shoping" Relationship="Self.FK__details__shoping__2E1BDC42" FromRole="details" ToRole="shoping" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idCategory" Type="Int16" />
+          <Property Name="price" Type="Int16" />
+          <Property Name="img" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int16" />
+          <NavigationProperty Name="details" Relationship="Self.FK__details__product__2F10007B" FromRole="products" ToRole="details" />
+          <NavigationProperty Name="category" Relationship="finalAngularDbModel.FK_products_category" FromRole="products" ToRole="category" />
+        </EntityType>
+        <EntityType Name="shoping">
+          <Key>
+            <PropertyRef Name="shopingId" />
+          </Key>
+          <Property Name="shopingId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerId" Type="Int16" />
+          <Property Name="shopingDate" Type="DateTime" Precision="0" />
+          <Property Name="shopingSum" Type="Int16" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__shoping__custome__2A4B4B5E" FromRole="shoping" ToRole="customer" />
+          <NavigationProperty Name="details" Relationship="Self.FK__details__shoping__2E1BDC42" FromRole="shoping" ToRole="details" />
+        </EntityType>
+        <Association Name="FK__shoping__custome__2A4B4B5E">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="shoping" Type="Self.shoping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="cusId" />
+            </Principal>
+            <Dependent Role="shoping">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__details__product__2F10007B">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__details__shoping__2E1BDC42">
+          <End Role="shoping" Type="Self.shoping" Multiplicity="0..1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shoping">
+              <PropertyRef Name="shopingId" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="shopingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="finalAngularDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="category" EntityType="Self.category" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="details" EntityType="Self.details" />
+          <EntitySet Name="products" EntityType="Self.products" />
+          <EntitySet Name="shoping" EntityType="Self.shoping" />
+          <AssociationSet Name="FK__shoping__custome__2A4B4B5E" Association="Self.FK__shoping__custome__2A4B4B5E">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="shoping" EntitySet="shoping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__details__product__2F10007B" Association="Self.FK__details__product__2F10007B">
+            <End Role="products" EntitySet="products" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__details__shoping__2E1BDC42" Association="Self.FK__details__shoping__2E1BDC42">
+            <End Role="shoping" EntitySet="shoping" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="finalAngularDbModel.sysdiagrams" />
+          <AssociationSet Name="FK_products_category" Association="finalAngularDbModel.FK_products_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_products_category">
+          <End Type="finalAngularDbModel.category" Role="category" Multiplicity="0..1" />
+          <End Type="finalAngularDbModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="finalAngularDbModelStoreContainer" CdmEntityContainer="finalAngularDbEntities">
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="finalAngularDbModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="finalAngularDbModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="cusId" ColumnName="cusId" />
+                <ScalarProperty Name="cusName" ColumnName="cusName" />
+                <ScalarProperty Name="cusCard" ColumnName="cusCard" />
+                <ScalarProperty Name="pin" ColumnName="pin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="details">
+            <EntityTypeMapping TypeName="finalAngularDbModel.details">
+              <MappingFragment StoreEntitySet="details">
+                <ScalarProperty Name="detailsId" ColumnName="detailsId" />
+                <ScalarProperty Name="shopingId" ColumnName="shopingId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="finalAngularDbModel.products">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shoping">
+            <EntityTypeMapping TypeName="finalAngularDbModel.shoping">
+              <MappingFragment StoreEntitySet="shoping">
+                <ScalarProperty Name="shopingId" ColumnName="shopingId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="shopingDate" ColumnName="shopingDate" />
+                <ScalarProperty Name="shopingSum" ColumnName="shopingSum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="finalAngularDbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

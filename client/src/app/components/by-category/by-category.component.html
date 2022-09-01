@@ -1,0 +1,14 @@
+<div *ngFor="let item of listProduct">
+    <div class="container mt-3">
+      <h2>{{item.price}} price</h2>
+      <p>Image at the top (card-img-top):</p>
+      <div class="card" style="width: 200px;">
+        <img class="card-img-top" src="../../../assets/flower/{{item.img}}.jpg" alt="Card image" style="width:100%">
+        <div class="card-body">
+          <h4 class="card-title">John Doe</h4>
+          <button type="button" class="פרטים נוספים" (click)="details(item)">details</button>
+          <button type="button" class="הוסף לסל" (click)="addToCart(item)" *ngIf="item.amount!=0">add</button>
+        </div>
+      </div>
+    </div>
+  </div>

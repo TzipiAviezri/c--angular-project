@@ -1,0 +1,51 @@
+<form (ngSubmit)="addProduct()" #Form="ngForm">
+    <input type="text"  placeholder="id" name="id" [(ngModel)]="currentProduct.id" 
+         #id='ngModel' required pattern="[a-zA-Z0-9]{8,20}">
+         validaiton name
+         <div *ngIf="id.invalid && (id.dirty || id.touched)">
+            <p *ngIf="id.errors?.required">must to input name</p>
+            <p *ngIf="id.errors?.pattern">type of name dont valid</p>
+        </div>
+        <br>
+        <input type="text"  placeholder="name" name="name" [(ngModel)]="currentProduct.prodName" 
+         #name='ngModel' required pattern="[a-zA-Z0-9]{8,20}">
+         <div *ngIf="name.invalid && (name.dirty || name.touched)">
+            <p *ngIf="name.errors?.required">must to input name</p>
+            <p *ngIf="name.errors?.pattern">type of name dont valid</p>
+        </div>
+    <br>
+       <input type="number"  placeholder="price" name="price" [(ngModel)]="currentProduct.price" 
+    #price='ngModel' required pattern="[a-zA-Z0-9]{8,20}">
+    <div *ngIf="price.invalid && (price.dirty || price.touched)">
+       <p *ngIf="price.errors?.required">must to input name</p>
+       <p *ngIf="price.errors?.pattern">type of name dont valid</p>
+   </div>
+<br>
+    <input type="img"  placeholder="img" name="img" [(ngModel)]="currentProduct.img" 
+    #img='ngModel' required pattern="[a-zA-Z0-9]{8,20}">
+    <div *ngIf="img.invalid && (img.dirty || img.touched)">
+       <p *ngIf="img.errors?.required">must to input name</p>
+       <p *ngIf="img.errors?.pattern">type of name dont valid</p>
+   </div>
+   <br>
+   <input type="color"  placeholder="color" name="color" [(ngModel)]="currentProduct.color" 
+   #color='ngModel' required pattern="[a-zA-Z0-9]{8,20}">
+   <div *ngIf="color.invalid && (color.dirty || color.touched)">
+      <p *ngIf="color.errors?.required">must to input name</p>
+      <p *ngIf="color.errors?.pattern">type of name dont valid</p>
+  </div>
+  <br>
+    <input type="number"  placeholder="amount" name="amount" [(ngModel)]="currentProduct.amount" 
+   #amount='ngModel' required pattern="[a-zA-Z0-9]{8,20}">
+   <div *ngIf="amount.invalid && (amount.dirty || amount.touched)">
+      <p *ngIf="amount.errors?.required">must to input name</p>
+      <p *ngIf="amount.errors?.pattern">type of name dont valid</p>
+  </div>
+<br>  
+<input type="text" placeholder="קטגוריות" list="1" >
+ <datalist id="1">
+ <option  *ngFor="let c of categoryList" >{{c.name }}</option>
+</datalist>
+ 
+    <input type="submit"  [disabled]="!Form.valid">
+</form>

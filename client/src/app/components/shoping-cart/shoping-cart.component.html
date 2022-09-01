@@ -1,0 +1,40 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <h2 style="text-align: right;">:סל הקניות שלך 🛒</h2>
+    <br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>שם המוצר 🌼</th>
+                <th>כמות 💐</th>
+                <th>מחיר ליחידה 💲</th>
+                <th>מחיר כולל 💰</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cartListProduct">
+                <td>{{item.idProduct}}</td>
+
+                <td>{{item.nameProduct}}</td>
+                <td><button type="button" class="btn btn-default btn-xs" (click)="dec(item)"> - </button>
+                    {{item.amount}} <button type="button" class="btn btn-default btn-xs" (click)="inc(item)"> +
+                    </button></td>
+                
+                <td><button type="button" class="btn btn-default btn-sm" (click)="delete(item)">delete 🗑</button></td>
+                <td>{{item.sum}}</td> 
+
+            </tr>
+        </tbody>
+    </table>
+    <div class="container text-center">
+    </div>
+    <button type="button" class="btn btn-default btn-block" (click)="finish()">לסיום הקניה ✔</button>
+<br>
+<br>
+<br>
+</div>

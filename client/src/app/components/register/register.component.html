@@ -1,0 +1,39 @@
+<form (ngSubmit)="login()" #Form="ngForm">
+        <input type="text"  placeholder="name" name="name" [(ngModel)]="currentUser.name" 
+         #name='ngModel' required pattern="[a-zA-Z0-9]{1,20}">
+         <div *ngIf="name.invalid && (name.dirty || name.touched)">
+            <p *ngIf="name.errors?.required">must to input name</p>
+            <p *ngIf="name.errors?.pattern">type of name dont valid</p>
+        </div>
+    <br>
+    <input type="password" placeholder="password" name="password" [(ngModel)]="currentUser.password" 
+    #password='ngModel' required>
+     <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <p *ngIf="password.errors?.required">must to input password</p>
+        <p *ngIf="password.errors?.pattern">type of password dont valid</p>
+    </div>
+    <br>
+    <p>card details</p>
+    <input type="txet" placeholder="card number" name="num" (ngModel)="cardDetails.num" 
+    #cardNumber='ngModel' required pattern="[0-9]">
+    <div *ngIf="cardNumber.invalid && (cardNumber.dirty || cardNumber.touched)">
+       <p *ngIf="cardNumber.errors?.required">must to input card number</p>
+       <p *ngIf="cardNumber.errors?.pattern">type of card number dont valid</p>
+   </div>
+    <br>
+    <input type="txet" placeholder="card valid" name="valid" (ngModel)="cardDetails.valid" 
+    #cardValid='ngModel' required pattern="[0-9]{4}">
+       <div *ngIf="cardValid.invalid && (cardValid.dirty || cardValid.touched)">
+        <p *ngIf="cardValid.errors?.required">must to input card valid</p>
+        <p *ngIf="cardValid.errors?.pattern">type of card valid dont valid</p>
+    </div>
+    <br>    
+    <input type="txet" placeholder="card pin" name="pin" (ngModel)="cardDetails.pin" 
+    #cardPin='ngModel' required pattern="[0-9]{3}">
+       <div *ngIf="cardPin.invalid && (cardPin.dirty || cardPin.touched)">
+        <p *ngIf="cardPin.errors?.required">must to input car pin</p>
+        <p *ngIf="cardPin.errors?.pattern">type of card pin dont valid</p>
+    </div>
+    <br>
+    <input type="submit"  [disabled]="!Form.valid">
+</form>

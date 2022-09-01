@@ -1,0 +1,9 @@
+<table><td>
+  <div #ngFor="let iten of categoryService.listCategories">
+    <tr >{{item.name}}
+       <br>
+       <button ><a routerLink='/byCategory/{{item.id}}'>go</a></button>
+    </tr>
+  </div>
+</td></table>
+<router-outlet></router-outlet>

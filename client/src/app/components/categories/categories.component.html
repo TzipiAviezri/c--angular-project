@@ -1,0 +1,10 @@
+<form  [formGroup]="categoryForm" (ngSubmit)="save()">
+<input type="text" formControlName="name" >
+ <div class="error" *ngIf="!name.valid && (name.dirty || name.touched)">
+    <div *ngIf="name.errors.required">Name is required!<br></div>
+    <div *ngIf="name.errors.minlength">Name must be 2 chars<br></div>
+    <div *ngIf="name.errors.pattern">Name must begining with capital letter<br></div>
+</div> 
+<input type="submit" value="Save" [disabled]="!categoryForm.valid">
+
+</form>

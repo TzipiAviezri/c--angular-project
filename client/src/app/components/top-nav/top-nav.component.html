@@ -1,0 +1,13 @@
+<nav class="navbar navbar-default" style="background-color: black; width: 100%; height: 60%;">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a routerLink='/shopingCart'>shopping cart</a></li>
+      <li><a routerLink='/login'>התחבר</a></li>
+      <li><a routerLink="/home">בית </a></li>
+      <li><a *ngIf="customerService.currentUser.id == 1" routerLink="/products">מוצרים </a></li>
+      <li><a *ngIf="customerService.currentUser.id == 1" routerLink="/categories">מחלקה </a></li>
+    </ul>
+  </div>
+  <p>date {{date | date}}</p>
+</nav>
+<router-outlet></router-outlet>

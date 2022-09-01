@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="finalAngularDbModelStoreContainer" CdmEntityContainer="finalAngularDbEntities">
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="finalAngularDbModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer">
+      <EntityTypeMapping TypeName="finalAngularDbModel.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="cusId" ColumnName="cusId" />
+          <ScalarProperty Name="cusName" ColumnName="cusName" />
+          <ScalarProperty Name="cusCard" ColumnName="cusCard" />
+          <ScalarProperty Name="pin" ColumnName="pin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="details">
+      <EntityTypeMapping TypeName="finalAngularDbModel.details">
+        <MappingFragment StoreEntitySet="details">
+          <ScalarProperty Name="detailsId" ColumnName="detailsId" />
+          <ScalarProperty Name="shopingId" ColumnName="shopingId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="finalAngularDbModel.products">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shoping">
+      <EntityTypeMapping TypeName="finalAngularDbModel.shoping">
+        <MappingFragment StoreEntitySet="shoping">
+          <ScalarProperty Name="shopingId" ColumnName="shopingId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="shopingDate" ColumnName="shopingDate" />
+          <ScalarProperty Name="shopingSum" ColumnName="shopingSum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="finalAngularDbModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
